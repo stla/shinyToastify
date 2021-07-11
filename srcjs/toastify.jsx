@@ -1,5 +1,5 @@
 import { reactShinyInput } from "reactR";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast, Slide, Zoom, Flip, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactHtmlParser from "react-html-parser";
 
@@ -32,6 +32,20 @@ Shiny.addCustomMessageHandler("shinyToastify", function(message){
   }
   if(isHTML(message.text)){
     message.text = <HtmlComponent html={message.text.__html} />;
+  }
+  switch(message.config.transition) {
+    case "slide":
+      message.config.transition = Slide;
+    break;
+    case "zoom":
+      message.config.transition = Zoom;
+    break;
+    case "flip":
+      message.config.transition = Flip;
+    break;
+    case "bounce":
+      message.config.transition = Bounce;
+    break;
   }
   toaster(message.text, message.config);
 });

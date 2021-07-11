@@ -32,6 +32,8 @@ useShinyToastify <- function(){
 #' @param position toast position, one of \code{"top-left"},
 #'   \code{"top-right"}, \code{"top-center"}, \code{"bottom-left"},
 #'   \code{"bottom-right"} or \code{"bottom-center"}
+#' @param transition the transition effect, one of \code{"slide"},
+#'   \code{"zoom"}, \code{"flip"} or \code{"bounce"}
 #' @param autoClose either a number, the time in ms to close the toast, or
 #'   \code{FALSE} to close the toast manually
 #' @param hideProgressBar Boolean, whether to hide the progress bar
@@ -52,6 +54,7 @@ showToast <- function(
   text,
   type = "default",
   position = "top-right",
+  transition = "slide",
   autoClose = 5000,
   hideProgressBar = FALSE,
   newestOnTop = FALSE,
@@ -64,6 +67,7 @@ showToast <- function(
 ){
   stopifnot(isString(type))
   stopifnot(isString(position))
+  stopifnot(isString(transition))
   stopifnot(isBoolean(hideProgressBar))
   stopifnot(isBoolean(newestOnTop))
   stopifnot(isBoolean(closeOnClick))
@@ -95,6 +99,10 @@ showToast <- function(
           "top-left", "top-right", "top-center",
           "bottom-left", "bottom-right", "bottom-center"
         )
+      ),
+      "transition" = match.arg(
+        transition,
+        c("slide", "zoom", "flip", "bounce")
       ),
       "autoClose" = autoClose,
       "hideProgressBar" = hideProgressBar,
