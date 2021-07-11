@@ -1,37 +1,10 @@
-# #' Title
-# #'
-# #' @export
-# #' @importFrom shiny addResourcePath
-# #' @importFrom htmltools tags
-#' @title xxx
-#' @export
-useShinyToastify <- function(){
-  toastifyInput()
-  # addResourcePath(
-  #   "wwwToastify",
-  #   system.file(
-  #     "www", "shinyToastify", "toastify",
-  #     package = "shinyToastify"
-  #   )
-  # )
-  # addResourcePath(
-  #   "wwwReact",
-  #   system.file(
-  #     "www", "react",
-  #     package = "reactR"
-  #   )
-  # )
-  # tags$head(
-  #   tags$script(src = "wwwReact/react.min.js"),
-  #   tags$script(src = "wwwReact/react-dom.min.js"),
-  #   tags$script(src = "wwwToastify/toastify.js")
-  # )
-}
-
+#' @title Use Shiny toastify
+#' @description This function must be called once in your Shiny \code{ui} to
+#'   allow to use \code{\link{showToast}}.
 #' @importFrom reactR createReactShinyInput
 #' @importFrom htmltools htmlDependency tags
-#' @noRd
-toastifyInput <- function(){
+#' @export
+useShinyToastify <- function(){
   createReactShinyInput(
     inputId = "ToastContainer-React-Toastify",
     class = "toastify",
@@ -48,22 +21,28 @@ toastifyInput <- function(){
   )
 }
 
-#' Title
+#' @title Show a toast
+#' @description Show a toast in a Shiny application.
 #'
-#' @param session
-#' @param text
-#' @param type
-#' @param position
-#' @param autoClose
-#' @param hideProgressBar
-#' @param newestOnTop
-#' @param closeOnClick
-#' @param rtl
-#' @param pauseOnFocusLoss
-#' @param draggable
-#' @param pauseOnHover
+#' @param session the Shiny \code{session} object
+#' @param text the text displayed in the toast, a character string or an html
+#'   element created with the \code{\link[htmltools:HTML]{HTML}} function
+#' @param type toast type, one of \code{"info"}, \code{"success"},
+#'   \code{"warning"}, \code{"error"}, \code{"default"} or \code{"dark"}
+#' @param position toast position, one of \code{"top-left"},
+#'   \code{"top-right"}, \code{"top-center"}, \code{"bottom-left"},
+#'   \code{"bottom-right"} or \code{"bottom-center"}
+#' @param autoClose either a number, the time in ms to close the toast, or
+#'   \code{FALSE} to close the toast manually
+#' @param hideProgressBar Boolean, whether to hide the progress bar
+#' @param newestOnTop ??????
+#' @param closeOnClick Boolean, whether to dismiss the toast on click
+#' @param rtl Boolean, right to left
+#' @param pauseOnFocusLoss Boolean, whether to pause the toast on focus loss
+#' @param draggable Boolean, ability to drag the toast
+#' @param draggableDirection \code{"x"} or \code{"y"}
+#' @param pauseOnHover Boolean, whether to pause the toast on hover
 #'
-#' @return
 #' @export
 #' @importFrom utils URLencode
 #'
@@ -80,17 +59,28 @@ showToast <- function(
   rtl = FALSE,
   pauseOnFocusLoss = TRUE,
   draggable = TRUE,
+  draggableDirection = "x",
   pauseOnHover = TRUE
 ){
+  stopifnot(isString(type))
+  stopifnot(isString(position))
   stopifnot(isBoolean(hideProgressBar))
   stopifnot(isBoolean(newestOnTop))
   stopifnot(isBoolean(closeOnClick))
   stopifnot(isBoolean(rtl))
   stopifnot(isBoolean(pauseOnFocusLoss))
   stopifnot(isBoolean(draggable))
+  stopifnot(isString(draggableDirection))
   stopifnot(isBoolean(pauseOnHover))
+  stopifnot(isNumber(autoClose) || isFALSE(autoClose))
   if(inherits(text, "html")){
     text <- list("__html" = URLencode(as.character(text)))
+  }else if(!isString(text)){
+    stop(
+      "The `text` argument must be either an ordinary character string or ",
+      "a html string created with the `HTML` function.",
+      call. = TRUE
+    )
   }
   message <- list(
     "text" = text,
@@ -113,6 +103,7 @@ showToast <- function(
       "rtl" = rtl,
       "pauseOnFocusLoss" = pauseOnFocusLoss,
       "draggable" = draggable,
+      "draggableDirection" = match.arg(draggableDirection, c("x", "y")),
       "pauseOnHover" = pauseOnHover
     )
   )

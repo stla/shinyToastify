@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactHtmlParser from "react-html-parser";
 
+
 const isHTML = (x) => {
   return x !== null && (typeof x === "object") && x.hasOwnProperty("__html");
 };
@@ -33,11 +34,12 @@ Shiny.addCustomMessageHandler("shinyToastify", function(message){
     message.text = <HtmlComponent html={message.text.__html} />;
   }
   toaster(message.text, message.config);
-  console.log("Toast", toast);
 });
+
 
 const Toaster = ({ configuration, value, setValue }) => {
   return <ToastContainer />;
 };
+
 
 reactShinyInput('.toastify', 'shinyToastify.toastify', Toaster);
