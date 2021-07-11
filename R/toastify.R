@@ -65,6 +65,7 @@ toastifyInput <- function(){
 #'
 #' @return
 #' @export
+#' @importFrom utils URLencode
 #'
 #' @examples
 showToast <- function(
@@ -88,6 +89,9 @@ showToast <- function(
   stopifnot(isBoolean(pauseOnFocusLoss))
   stopifnot(isBoolean(draggable))
   stopifnot(isBoolean(pauseOnHover))
+  if(inherits(text, "html")){
+    text <- list("__html" = URLencode(as.character(text)))
+  }
   message <- list(
     "text" = text,
     "type" = match.arg(
