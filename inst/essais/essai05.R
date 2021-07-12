@@ -15,11 +15,13 @@ server <- function(input, output, session){
 
   observeEvent(input[["btn"]], {
 
-    toastTransition <- toastTransitions[input[["btn"]]]
-    html <- HTML(sprintf(
-      '<span style="font-size: 30px; font-family: cursive;">%s</span>',
-      paste0(toastTransition, " transition")
-    ))
+    toastTransition <- toastTransitions[1L + (input[["btn"]] %% 4L)]
+
+    html <- HTML(
+      '<span style="font-size: 30px; font-family: cursive;">',
+      paste0(toastTransition, " transition"),
+      '</span>',
+    )
 
     showToast(
       session,
