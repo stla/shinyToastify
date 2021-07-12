@@ -47,6 +47,8 @@ useShinyToastify <- function(){
 #' @param pauseOnHover Boolean, whether to pause the toast on hover
 #' @param Rcallback a R function without arguments to be executed when the
 #'   toast is close
+#' @param JScallback some JavaScript code given as a string to be executed
+#'   when the toast is close
 #'
 #' @export
 #' @importFrom utils URLencode
@@ -69,7 +71,8 @@ showToast <- function(
   draggable = TRUE,
   draggableDirection = "x",
   pauseOnHover = TRUE,
-  Rcallback = function(){NULL}
+  Rcallback = function(){NULL},
+  JScallback = NULL
 ){
   stopifnot(isString(type))
   stopifnot(isString(position))
@@ -90,6 +93,7 @@ showToast <- function(
       call. = TRUE
     )
   }
+  stopifnot(is.null(JScallback) || isString(JScallback))
   if(inherits(text, "html")){
     text <- list("__html" = URLencode(as.character(text)))
   }else if(!isString(text)){
@@ -126,7 +130,8 @@ showToast <- function(
       "draggable" = draggable,
       "draggableDirection" = match.arg(draggableDirection, c("x", "y")),
       "pauseOnHover" = pauseOnHover
-    )
+    ),
+    "JScallback" = if(!is.null(JScallback)) URLencode(JScallback)
   )
   session$sendCustomMessage("shinyToastify", message)
   observeEvent(input[["shinyToastifyOnClose"]], {

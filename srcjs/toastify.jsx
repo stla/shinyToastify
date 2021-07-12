@@ -47,9 +47,14 @@ Shiny.addCustomMessageHandler("shinyToastify", function(message){
       message.config.transition = Bounce;
     break;
   }
+  let jscallback = () => {};
+  if(message.JScallback !== null){
+    jscallback = eval(`() => {${decodeURI(message.JScallback)}}`);
+  }
   message.config = $.extend(message.config, 
     {
       onClose: () => {
+        jscallback();
         Shiny.setInputValue("shinyToastifyOnClose", true);
         setTimeout(function(){ Shiny.setInputValue("shinyToastifyOnClose", null) });
       }

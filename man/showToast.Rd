@@ -20,7 +20,8 @@ showToast(
   draggable = TRUE,
   draggableDirection = "x",
   pauseOnHover = TRUE,
-  Rcallback = function() {     NULL }
+  Rcallback = function() {     NULL },
+  JScallback = NULL
 )
 }
 \arguments{
@@ -62,6 +63,9 @@ element created with the \code{\link[htmltools:HTML]{HTML}} function}
 
 \item{Rcallback}{a R function without arguments to be executed when the
 toast is close}
+
+\item{JScallback}{some JavaScript code given as a string to be executed
+when the toast is close}
 }
 \description{
 Show a toast in a Shiny application.

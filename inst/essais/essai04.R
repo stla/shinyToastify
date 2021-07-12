@@ -32,6 +32,11 @@ server <- function(input, output, session){
     print(RV())
   })
 
+  observe({
+    cat("test:\n")
+    print(input[["test"]])
+  })
+
   observeEvent(input[["btn"]], {
 
     toastType <- input[["type"]]
@@ -48,7 +53,8 @@ server <- function(input, output, session){
       type = toastType,
       transition = input[["transition"]],
       autoClose = 3000,
-      Rcallback = function() RV(input[["btn"]])
+      Rcallback = function() RV(input[["btn"]]),
+      JScallback = "Shiny.setInputValue('test', 'HELLO')"
     )
 
   })
