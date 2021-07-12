@@ -47,6 +47,14 @@ Shiny.addCustomMessageHandler("shinyToastify", function(message){
       message.config.transition = Bounce;
     break;
   }
+  message.config = $.extend(message.config, 
+    {
+      onClose: () => {
+        Shiny.setInputValue("shinyToastifyOnClose", true);
+        setTimeout(function(){ Shiny.setInputValue("shinyToastifyOnClose", null) });
+      }
+    }
+  );
   toaster(message.text, message.config);
 });
 

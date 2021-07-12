@@ -16,6 +16,7 @@ shinyServer(
 
       showToast(
         session,
+        input,
         text = html,
         type = toastType,
         transition = input[["transition"]],

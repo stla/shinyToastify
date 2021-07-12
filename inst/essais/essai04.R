@@ -25,6 +25,13 @@ ui <- fluidPage(
 
 server <- function(input, output, session){
 
+  RV <- reactiveVal()
+
+  observe({
+    cat("RV:\n")
+    print(RV())
+  })
+
   observeEvent(input[["btn"]], {
 
     toastType <- input[["type"]]
@@ -36,10 +43,12 @@ server <- function(input, output, session){
 
     showToast(
       session,
+      input,
       text = html,
       type = toastType,
       transition = input[["transition"]],
-      autoClose = 3000
+      autoClose = 3000,
+      Rcallback = function() RV(input[["btn"]])
     )
 
   })

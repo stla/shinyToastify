@@ -25,6 +25,7 @@ useShinyToastify <- function(){
 #' @description Show a toast in a Shiny application.
 #'
 #' @param session the Shiny \code{session} object
+#' @param input the Shiny \code{input} object
 #' @param text the text displayed in the toast, a character string or an html
 #'   element created with the \code{\link[htmltools:HTML]{HTML}} function
 #' @param type toast type, one of \code{"info"}, \code{"success"},
@@ -44,13 +45,17 @@ useShinyToastify <- function(){
 #' @param draggable Boolean, ability to drag the toast
 #' @param draggableDirection \code{"x"} or \code{"y"}
 #' @param pauseOnHover Boolean, whether to pause the toast on hover
+#' @param Rcallback a R function without arguments to be executed when the
+#'   toast is close
 #'
 #' @export
 #' @importFrom utils URLencode
+#' @importFrom shiny observeEvent
 #'
 #' @examples
 showToast <- function(
   session,
+  input,
   text,
   type = "default",
   position = "top-right",
@@ -63,7 +68,8 @@ showToast <- function(
   pauseOnFocusLoss = TRUE,
   draggable = TRUE,
   draggableDirection = "x",
-  pauseOnHover = TRUE
+  pauseOnHover = TRUE,
+  Rcallback = function(){NULL}
 ){
   stopifnot(isString(type))
   stopifnot(isString(position))
@@ -77,6 +83,13 @@ showToast <- function(
   stopifnot(isString(draggableDirection))
   stopifnot(isBoolean(pauseOnHover))
   stopifnot(isNumber(autoClose) || isFALSE(autoClose))
+  stopifnot(isFunction(Rcallback))
+  if(!is.null(formals(Rcallback))){
+    stop(
+      "The `Rcallback` argument must a function without arguments.",
+      call. = TRUE
+    )
+  }
   if(inherits(text, "html")){
     text <- list("__html" = URLencode(as.character(text)))
   }else if(!isString(text)){
@@ -116,4 +129,7 @@ showToast <- function(
     )
   )
   session$sendCustomMessage("shinyToastify", message)
+  observeEvent(input[["shinyToastifyOnClose"]], {
+    Rcallback()
+  }, once = TRUE)
 }

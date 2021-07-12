@@ -9619,6 +9619,14 @@ Shiny.addCustomMessageHandler("shinyToastify", function (message) {
       break;
   }
 
+  message.config = $.extend(message.config, {
+    onClose: function onClose() {
+      Shiny.setInputValue("shinyToastifyOnClose", true);
+      setTimeout(function () {
+        Shiny.setInputValue("shinyToastifyOnClose", null);
+      });
+    }
+  });
   toaster(message.text, message.config);
 });
 

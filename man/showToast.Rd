@@ -6,6 +6,7 @@
 \usage{
 showToast(
   session,
+  input,
   text,
   type = "default",
   position = "top-right",
@@ -18,11 +19,14 @@ showToast(
   pauseOnFocusLoss = TRUE,
   draggable = TRUE,
   draggableDirection = "x",
-  pauseOnHover = TRUE
+  pauseOnHover = TRUE,
+  Rcallback = function() {     NULL }
 )
 }
 \arguments{
 \item{session}{the Shiny \code{session} object}
+
+\item{input}{the Shiny \code{input} object}
 
 \item{text}{the text displayed in the toast, a character string or an html
 element created with the \code{\link[htmltools:HTML]{HTML}} function}
@@ -55,6 +59,9 @@ element created with the \code{\link[htmltools:HTML]{HTML}} function}
 \item{draggableDirection}{\code{"x"} or \code{"y"}}
 
 \item{pauseOnHover}{Boolean, whether to pause the toast on hover}
+
+\item{Rcallback}{a R function without arguments to be executed when the
+toast is close}
 }
 \description{
 Show a toast in a Shiny application.
