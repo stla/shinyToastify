@@ -2,8 +2,15 @@ Package: shinyToastify
 Type: Package
 Title: Pretty Notifications for 'Shiny'
 Version: 0.1.0
-Author: Stéphane Laurent
-Maintainer: Stéphane Laurent <laurent_step@outlook.fr>
+Authors@R: c(
+    person(given = "Stéphane",
+           family = "Laurent",
+           role = c("aut", "cre"),
+           email = "laurent_step@outlook.fr"),
+    person(given = "Fadi",
+           family = "Khadra",
+           role = "cph",
+           comment = "'React-Toastify' library (https://fkhadra.github.io/react-toastify/introduction)"))
 Description: This is a wrapper of the 'React' library 'React-Toastify'. It allows to show some notifications (toasts) in 'Shiny' applications. There are options for the style, the position, the transition effect, and more.
 License: GPL-3
 Encoding: UTF-8
