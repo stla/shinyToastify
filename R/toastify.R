@@ -54,10 +54,10 @@ useShinyToastify <- function(){
 #' @param progressClassName name of a CSS class applied on the progress bar
 #' @param style inline style applied to the container, e.g.
 #'   \code{list(width = "1000px")}
-#' @param Rcallback a R function without arguments to be executed when the
-#'   toast is close
+#' @param Rcallback a R function without arguments to be executed whenever the
+#'   toast is closed
 #' @param JScallback some JavaScript code given as a string to be executed
-#'   when the toast is close
+#'   whenever the toast is closed, e.g. \code{'alert("The toast is cosed")'}
 #'
 #' @return No return value, called for side effect.
 #'

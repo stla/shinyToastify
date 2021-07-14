@@ -77,11 +77,11 @@ element created with the \code{\link[htmltools:HTML]{HTML}} function}
 \item{style}{inline style applied to the container, e.g.
 \code{list(width = "1000px")}}
 
-\item{Rcallback}{a R function without arguments to be executed when the
-toast is close}
+\item{Rcallback}{a R function without arguments to be executed whenever the
+toast is closed}
 
 \item{JScallback}{some JavaScript code given as a string to be executed
-when the toast is close}
+whenever the toast is closed, e.g. \code{'alert("The toast is cosed")'}}
 }
 \value{
 No return value, called for side effect.
