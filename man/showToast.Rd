@@ -20,6 +20,11 @@ showToast(
   draggable = TRUE,
   draggableDirection = "x",
   pauseOnHover = TRUE,
+  className = NULL,
+  toastClassName = NULL,
+  bodyClassName = NULL,
+  progressClassName = NULL,
+  style = NULL,
   Rcallback = function() {     NULL },
   JScallback = NULL
 )
@@ -47,7 +52,7 @@ element created with the \code{\link[htmltools:HTML]{HTML}} function}
 
 \item{hideProgressBar}{Boolean, whether to hide the progress bar}
 
-\item{newestOnTop}{??????}
+\item{newestOnTop}{I don't know what is this option (help wanted)}
 
 \item{closeOnClick}{Boolean, whether to dismiss the toast on click}
 
@@ -60,6 +65,17 @@ element created with the \code{\link[htmltools:HTML]{HTML}} function}
 \item{draggableDirection}{\code{"x"} or \code{"y"}}
 
 \item{pauseOnHover}{Boolean, whether to pause the toast on hover}
+
+\item{className}{name of a CSS class applied to the container}
+
+\item{toastClassName}{name of a CSS class applied on the toast wrapper}
+
+\item{bodyClassName}{name of a CSS class applied on the toast body}
+
+\item{progressClassName}{name of a CSS class applied on the progress bar}
+
+\item{style}{inline style applied to the container, e.g.
+\code{list(width = "1000px")}}
 
 \item{Rcallback}{a R function without arguments to be executed when the
 toast is close}

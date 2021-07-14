@@ -13,3 +13,11 @@ isNumber <- function(x){
 isFunction <- function(x){
   inherits(x, "function")
 }
+
+dropNulls <- function(x){
+  Filter(Negate(is.null), x)
+}
+
+isNamedList <- function(x){
+  is.list(x) && !is.null(names(x)) && all(names(x) != "")
+}

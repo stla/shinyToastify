@@ -38,13 +38,19 @@ useShinyToastify <- function(){
 #' @param autoClose either a number, the time in ms to close the toast, or
 #'   \code{FALSE} to close the toast manually
 #' @param hideProgressBar Boolean, whether to hide the progress bar
-#' @param newestOnTop ??????
+#' @param newestOnTop I don't know what is this option (help wanted)
 #' @param closeOnClick Boolean, whether to dismiss the toast on click
 #' @param rtl Boolean, right to left
 #' @param pauseOnFocusLoss Boolean, whether to pause the toast on focus loss
 #' @param draggable Boolean, ability to drag the toast
 #' @param draggableDirection \code{"x"} or \code{"y"}
 #' @param pauseOnHover Boolean, whether to pause the toast on hover
+#' @param className name of a CSS class applied to the container
+#' @param toastClassName name of a CSS class applied on the toast wrapper
+#' @param bodyClassName name of a CSS class applied on the toast body
+#' @param progressClassName name of a CSS class applied on the progress bar
+#' @param style inline style applied to the container, e.g.
+#'   \code{list(width = "1000px")}
 #' @param Rcallback a R function without arguments to be executed when the
 #'   toast is close
 #' @param JScallback some JavaScript code given as a string to be executed
@@ -111,6 +117,11 @@ showToast <- function(
   draggable = TRUE,
   draggableDirection = "x",
   pauseOnHover = TRUE,
+  className = NULL,
+  toastClassName = NULL,
+  bodyClassName = NULL,
+  progressClassName = NULL,
+  style = NULL,
   Rcallback = function(){NULL},
   JScallback = NULL
 ){
@@ -126,6 +137,11 @@ showToast <- function(
   stopifnot(isString(draggableDirection))
   stopifnot(isBoolean(pauseOnHover))
   stopifnot(isNumber(autoClose) || isFALSE(autoClose))
+  stopifnot(is.null(className) || isString(className))
+  stopifnot(is.null(toastClassName) || isString(toastClassName))
+  stopifnot(is.null(bodyClassName) || isString(bodyClassName))
+  stopifnot(is.null(progressClassName) || isString(progressClassName))
+  stopifnot(is.null(style) || isNamedList(style))
   stopifnot(isFunction(Rcallback))
   if(!is.null(formals(Rcallback))){
     stop(
@@ -149,7 +165,7 @@ showToast <- function(
       type,
       c("info", "success", "warning", "error", "default", "dark")
     ),
-    "config" = list(
+    "config" = dropNulls(list(
       "position" = match.arg(
         position,
         c(
@@ -169,8 +185,13 @@ showToast <- function(
       "pauseOnFocusLoss" = pauseOnFocusLoss,
       "draggable" = draggable,
       "draggableDirection" = match.arg(draggableDirection, c("x", "y")),
-      "pauseOnHover" = pauseOnHover
-    ),
+      "pauseOnHover" = pauseOnHover,
+      "className" = className,
+      "toastClassName" = toastClassName,
+      "bodyClassName" = bodyClassName,
+      "progressClassName" = progressClassName,
+      "style" = style
+    )),
     "JScallback" = if(!is.null(JScallback)) URLencode(JScallback)
   )
   session$sendCustomMessage("shinyToastify", message)
