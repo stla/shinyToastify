@@ -1,6 +1,9 @@
 #' @title Use Shiny toastify
 #' @description This function must be called once in your Shiny \code{ui} to
 #'   allow to use \code{\link{showToast}}.
+#'
+#' @return An object of class \code{shiny.tag.list}.
+#'
 #' @importFrom reactR createReactShinyInput
 #' @importFrom htmltools htmlDependency tags
 #' @export
@@ -55,6 +58,8 @@ useShinyToastify <- function(){
 #'   toast is close
 #' @param JScallback some JavaScript code given as a string to be executed
 #'   when the toast is close
+#'
+#' @return No return value, called for side effect.
 #'
 #' @export
 #' @importFrom utils URLencode

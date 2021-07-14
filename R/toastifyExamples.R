@@ -1,6 +1,8 @@
 #' @title Shiny Toastify examples
 #' @description List of examples.
 #'
+#' @return No return value, just prints a message listing the example names.
+#'
 #' @export
 #'
 #' @examples
@@ -23,6 +25,8 @@ shinyToastifyExamples <- function(){
 #' @param display.mode the display mode to use when running the example; see
 #'   \code{\link[shiny:runApp]{runApp}}
 #' @param ... arguments passed to \code{\link[shiny:runApp]{runApp}}
+#'
+#' @return No return value, just launches a Shiny app.
 #'
 #' @export
 #' @importFrom shiny runApp

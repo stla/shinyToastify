@@ -6,6 +6,9 @@
 \usage{
 useShinyToastify()
 }
+\value{
+An object of class \code{shiny.tag.list}.
+}
 \description{
 This function must be called once in your Shiny \code{ui} to
   allow to use \code{\link{showToast}}.

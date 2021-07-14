@@ -83,6 +83,9 @@ toast is close}
 \item{JScallback}{some JavaScript code given as a string to be executed
 when the toast is close}
 }
+\value{
+No return value, called for side effect.
+}
 \description{
 Show a toast in a Shiny application.
 }

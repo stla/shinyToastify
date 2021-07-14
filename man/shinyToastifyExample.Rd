@@ -14,6 +14,9 @@ shinyToastifyExample(example, display.mode = "showcase", ...)
 
 \item{...}{arguments passed to \code{\link[shiny:runApp]{runApp}}}
 }
+\value{
+No return value, just launches a Shiny app.
+}
 \description{
 A function to run examples of Shiny apps using the
   \code{shinyToastify} package.

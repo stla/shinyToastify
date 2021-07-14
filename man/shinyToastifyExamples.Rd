@@ -6,6 +6,9 @@
 \usage{
 shinyToastifyExamples()
 }
+\value{
+No return value, just prints a message listing the example names.
+}
 \description{
 List of examples.
 }
