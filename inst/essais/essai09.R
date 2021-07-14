@@ -25,7 +25,8 @@ server <- function(input, output, session){
       type = "dark",
       transition = "zoom",
       position = toastPosition,
-      autoClose = FALSE
+      autoClose = FALSE,
+      style = list(boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 30px 4px")
     )
 
   })

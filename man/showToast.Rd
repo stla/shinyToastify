@@ -79,7 +79,7 @@ remove it by dragging}
 \item{progressClassName}{name of a CSS class applied on the progress bar}
 
 \item{style}{inline style applied to the container, e.g.
-\code{list(width = "1000px")}}
+\code{list(boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 30px 4px")}}
 
 \item{Rcallback}{a R function without arguments to be executed whenever the
 toast is closed}

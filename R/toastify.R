@@ -55,7 +55,7 @@ useShinyToastify <- function(){
 #' @param bodyClassName name of a CSS class applied on the toast body
 #' @param progressClassName name of a CSS class applied on the progress bar
 #' @param style inline style applied to the container, e.g.
-#'   \code{list(width = "1000px")}
+#'   \code{list(boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 30px 4px")}
 #' @param Rcallback a R function without arguments to be executed whenever the
 #'   toast is closed
 #' @param JScallback some JavaScript code given as a string to be executed
