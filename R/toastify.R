@@ -45,8 +45,10 @@ useShinyToastify <- function(){
 #' @param closeOnClick Boolean, whether to dismiss the toast on click
 #' @param rtl Boolean, right to left
 #' @param pauseOnFocusLoss Boolean, whether to pause the toast on focus loss
-#' @param draggable Boolean, ability to drag the toast
+#' @param draggable Boolean, ability to drag the toast to remove it
 #' @param draggableDirection \code{"x"} or \code{"y"}
+#' @param draggablePercent the percentage of the width of the toast needed to
+#'   remove it by dragging
 #' @param pauseOnHover Boolean, whether to pause the toast on hover
 #' @param className name of a CSS class applied to the container
 #' @param toastClassName name of a CSS class applied on the toast wrapper
@@ -121,6 +123,7 @@ showToast <- function(
   pauseOnFocusLoss = TRUE,
   draggable = TRUE,
   draggableDirection = "x",
+  draggablePercent = 80,
   pauseOnHover = TRUE,
   className = NULL,
   toastClassName = NULL,
@@ -140,6 +143,7 @@ showToast <- function(
   stopifnot(isBoolean(pauseOnFocusLoss))
   stopifnot(isBoolean(draggable))
   stopifnot(isString(draggableDirection))
+  stopifnot(isNumber(draggablePercent))
   stopifnot(isBoolean(pauseOnHover))
   stopifnot(isNumber(autoClose) || isFALSE(autoClose))
   stopifnot(is.null(className) || isString(className))
@@ -190,6 +194,7 @@ showToast <- function(
       "pauseOnFocusLoss" = pauseOnFocusLoss,
       "draggable" = draggable,
       "draggableDirection" = match.arg(draggableDirection, c("x", "y")),
+      "draggablePercent" = draggablePercent,
       "pauseOnHover" = pauseOnHover,
       "className" = className,
       "toastClassName" = toastClassName,

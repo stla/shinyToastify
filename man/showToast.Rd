@@ -19,6 +19,7 @@ showToast(
   pauseOnFocusLoss = TRUE,
   draggable = TRUE,
   draggableDirection = "x",
+  draggablePercent = 80,
   pauseOnHover = TRUE,
   className = NULL,
   toastClassName = NULL,
@@ -60,9 +61,12 @@ element created with the \code{\link[htmltools:HTML]{HTML}} function}
 
 \item{pauseOnFocusLoss}{Boolean, whether to pause the toast on focus loss}
 
-\item{draggable}{Boolean, ability to drag the toast}
+\item{draggable}{Boolean, ability to drag the toast to remove it}
 
 \item{draggableDirection}{\code{"x"} or \code{"y"}}
+
+\item{draggablePercent}{the percentage of the width of the toast needed to
+remove it by dragging}
 
 \item{pauseOnHover}{Boolean, whether to pause the toast on hover}
 
