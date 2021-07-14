@@ -125,7 +125,11 @@ server <- function(input, output, session){
       text = html,
       type = "success",
       transition = tolower(toastTransition),
-      autoClose = 3000
+      autoClose = 3000,
+      style = list(
+        border = "4px solid crimson",
+        boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 30px 4px"
+      )
     )
 
   })
