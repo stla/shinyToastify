@@ -23,6 +23,15 @@ A function to run examples of Shiny apps using the
 }
 \examples{
 if(interactive()){
+  shinyToastifyExample("bodyClassName")
+}
+if(interactive()){
+  shinyToastifyExample("className")
+}
+if(interactive()){
+  shinyToastifyExample("progressClassName")
+}
+if(interactive()){
   shinyToastifyExample("TypeAndTransition")
 }
 }

@@ -33,6 +33,15 @@ shinyToastifyExamples <- function(){
 #'
 #' @examples
 #' if(interactive()){
+#'   shinyToastifyExample("bodyClassName")
+#' }
+#' if(interactive()){
+#'   shinyToastifyExample("className")
+#' }
+#' if(interactive()){
+#'   shinyToastifyExample("progressClassName")
+#' }
+#' if(interactive()){
 #'   shinyToastifyExample("TypeAndTransition")
 #' }
 shinyToastifyExample <- function(example, display.mode = "showcase", ...) {
