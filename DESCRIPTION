@@ -1,7 +1,7 @@
 Package: shinyToastify
 Type: Package
 Title: Pretty Notifications for 'Shiny'
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person(given = "Stéphane",
            family = "Laurent",

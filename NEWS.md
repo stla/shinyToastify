@@ -1,3 +1,3 @@
-# shinyToastify 0.1.0
+# shinyToastify 1.0.0
 
 First release.
