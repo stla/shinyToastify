@@ -9,3 +9,4 @@
 ^inst/essais$
 ^inst/screenshots$
 ^cran-comments\.md$
+^CRAN-RELEASE$
