@@ -14,23 +14,34 @@ server <- function(input, output, session){
     "top-left", "top-right", "top-center",
     "bottom-left", "bottom-right", "bottom-center"
   )
+  icons <- c(
+    "error"   = "times",
+    "info"    = "info",
+    "success" = "check",
+    "warning" = "exclamation",
+    "default" = "thumbs-up",
+    "dark"    = "moon"
+  )
+  types <- names(icons)
 
   observeEvent(input[["btn"]], {
 
-    toastPosition <- toastPositions[1L + (input[["btn"]] %% 6L)]
+    i <- 1L + (input[["btn"]] %% 6L)
 
-    html <- #HTML(as.character(
-      tags$span(
-        fa_i("car", style = "color:yellow"),
-        "Here is the <em>", toastPosition, "</em> position"
-      )
-    #))
+    toastPosition <- toastPositions[i]
+    icon          <- icons[i]
+    type          <- types[i]
+
+    html <- tags$span(
+      fa_i(icon, style = "font-size:2rem; vertical-align:middle;"),
+      "&nbsp;", "Here is the <em>", toastPosition, "</em> position"
+    )
 
     showToast(
       session,
       input,
       text = html,
-      type = "success",
+      type = type,
       transition = "zoom",
       position = toastPosition,
       autoClose = FALSE,
