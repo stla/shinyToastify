@@ -6,17 +6,21 @@
 #'
 #' @importFrom reactR createReactShinyInput
 #' @importFrom htmltools htmlDependency tags
+#' @importFrom fontawesome fa_html_dependency
 #' @export
 useShinyToastify <- function(){
   createReactShinyInput(
     inputId = "ToastContainer-React-Toastify",
     class = "toastify",
-    dependencies = htmlDependency(
-      name = "toastify-input",
-      version = "1.0.0",
-      src = "www/shinyToastify/toastify",
-      package = "shinyToastify",
-      script = "toastify.js"
+    dependencies = list(
+      htmlDependency(
+        name = "toastify-input",
+        version = "1.0.0",
+        src = "www/shinyToastify/toastify",
+        package = "shinyToastify",
+        script = "toastify.js"
+      ),
+      fa_html_dependency()
     ),
     default = NULL,
     configuration = list(),
@@ -29,8 +33,10 @@ useShinyToastify <- function(){
 #'
 #' @param session the Shiny \code{session} object
 #' @param input the Shiny \code{input} object
-#' @param text the text displayed in the toast, a character string or an html
-#'   element created with the \code{\link[htmltools:HTML]{HTML}} function
+#' @param text the text displayed in the toast; this can be a character string,
+#'   an html element created with the \code{\link[htmltools:HTML]{HTML}}
+#'   function, or a \code{shiny.tag} object such as
+#'   \code{tags$span(style = "color:lime;", "Message")}
 #' @param type toast type, one of \code{"info"}, \code{"success"},
 #'   \code{"warning"}, \code{"error"}, \code{"default"} or \code{"dark"}
 #' @param position toast position, one of \code{"top-left"},
@@ -163,6 +169,9 @@ showToast <- function(
     )
   }
   stopifnot(is.null(JScallback) || isString(JScallback))
+  if(inherits(text, "shiny.tag")){
+    text <- HTML(as.character(text))
+  }
   if(inherits(text, "html")){
     text <- list("__html" = URLencode(as.character(text)))
   }else if(!isString(text)){

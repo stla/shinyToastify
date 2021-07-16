@@ -35,8 +35,10 @@ showToast(
 
 \item{input}{the Shiny \code{input} object}
 
-\item{text}{the text displayed in the toast, a character string or an html
-element created with the \code{\link[htmltools:HTML]{HTML}} function}
+\item{text}{the text displayed in the toast; this can be a character string,
+an html element created with the \code{\link[htmltools:HTML]{HTML}}
+function, or a \code{shiny.tag} object such as
+\code{tags$span(style = "color:lime;", "Message")}}
 
 \item{type}{toast type, one of \code{"info"}, \code{"success"},
 \code{"warning"}, \code{"error"}, \code{"default"} or \code{"dark"}}
