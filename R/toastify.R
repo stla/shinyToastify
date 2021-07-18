@@ -65,7 +65,7 @@ useShinyToastify <- function(){
 #' @param Rcallback a R function without arguments to be executed whenever the
 #'   toast is closed
 #' @param JScallback some JavaScript code given as a string to be executed
-#'   whenever the toast is closed, e.g. \code{'alert("The toast is cosed")'}
+#'   whenever the toast is closed, e.g. \code{'alert("The toast is closed")'}
 #'
 #' @return No return value, called for side effect.
 #'

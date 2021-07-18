@@ -87,7 +87,7 @@ remove it by dragging}
 toast is closed}
 
 \item{JScallback}{some JavaScript code given as a string to be executed
-whenever the toast is closed, e.g. \code{'alert("The toast is cosed")'}}
+whenever the toast is closed, e.g. \code{'alert("The toast is closed")'}}
 }
 \value{
 No return value, called for side effect.
