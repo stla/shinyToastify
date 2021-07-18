@@ -72,6 +72,7 @@ useShinyToastify <- function(){
 #' @export
 #' @importFrom utils URLencode
 #' @importFrom shiny observeEvent
+#' @importFrom htmltools HTML
 #'
 #' @examples library(shiny)
 #' library(shinyToastify)
