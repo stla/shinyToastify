@@ -1,4 +1,4 @@
-# shinyToastify 1.0.0.9000
+# shinyToastify 2.0.0
 
 * Added dependency to the `fontawesome` package, to allow inclusion of an icon 
 in a toast. Icons must be included with the `fa_i` function; that does not 
