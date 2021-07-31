@@ -3,6 +3,7 @@
 export(shinyToastifyExample)
 export(shinyToastifyExamples)
 export(showToast)
+export(toastUpdate)
 export(useShinyToastify)
 importFrom(fontawesome,fa_html_dependency)
 importFrom(htmltools,HTML)

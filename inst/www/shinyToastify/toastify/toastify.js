@@ -9647,6 +9647,44 @@ Shiny.addCustomMessageHandler("shinyToastify", function (message) {
   });
   toaster(message.text, message.config);
 });
+Shiny.addCustomMessageHandler("shinyToastifyUpdate", function (message) {
+  if (isHTML(message.render)) {
+    message.render = /*#__PURE__*/React.createElement(HtmlComponent, {
+      html: message.render.__html
+    });
+  }
+
+  switch (message.config.transition) {
+    case "slide":
+      message.config.transition = react_toastify__WEBPACK_IMPORTED_MODULE_1__["Slide"];
+      break;
+
+    case "zoom":
+      message.config.transition = react_toastify__WEBPACK_IMPORTED_MODULE_1__["Zoom"];
+      break;
+
+    case "flip":
+      message.config.transition = react_toastify__WEBPACK_IMPORTED_MODULE_1__["Flip"];
+      break;
+
+    case "bounce":
+      message.config.transition = react_toastify__WEBPACK_IMPORTED_MODULE_1__["Bounce"];
+      break;
+  }
+
+  var jscallback = function jscallback() {};
+
+  if (message.JScallback !== null) {
+    jscallback = eval("() => {".concat(decodeURI(message.JScallback), "}"));
+  }
+
+  message.config = $.extend(message.config, {
+    onClose: function onClose() {
+      jscallback();
+    }
+  });
+  react_toastify__WEBPACK_IMPORTED_MODULE_1__["toast"].update(message.toastId, message.config);
+});
 
 var Toaster = function Toaster(_ref2) {
   var configuration = _ref2.configuration,

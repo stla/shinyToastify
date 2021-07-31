@@ -69,6 +69,39 @@ Shiny.addCustomMessageHandler("shinyToastify", function(message){
 });
 
 
+Shiny.addCustomMessageHandler("shinyToastifyUpdate", function(message){
+  if(isHTML(message.render)){
+    message.render = <HtmlComponent html={message.render.__html} />;
+  }
+  switch(message.config.transition) {
+    case "slide":
+      message.config.transition = Slide;
+    break;
+    case "zoom":
+      message.config.transition = Zoom;
+    break;
+    case "flip":
+      message.config.transition = Flip;
+    break;
+    case "bounce":
+      message.config.transition = Bounce;
+    break;
+  }
+  let jscallback = () => {};
+  if(message.JScallback !== null){
+    jscallback = eval(`() => {${decodeURI(message.JScallback)}}`);
+  }
+  message.config = $.extend(message.config, 
+    {
+      onClose: () => {
+        jscallback();
+      }
+    }
+  );
+  toast.update(message.toastId, message.config);
+});
+
+
 const Toaster = ({ configuration, value, setValue }) => {
   return <ToastContainer />;
 };
