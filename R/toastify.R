@@ -188,7 +188,7 @@ showToast <- function(
   }else if(!isString(text)){
     stop(
       "The `text` argument must be either an ordinary character string or ",
-      "a html string created with the `HTML` function.",
+      "a html string created with the `HTML` function or a shiny tag.",
       call. = TRUE
     )
   }
@@ -236,10 +236,11 @@ showToast <- function(
 }
 
 #' @title Update a toast
-#' @description Update a toast in a Shiny application.
+#' @description Update a toast in a Shiny application. Run
+#'   \code{shinyToastifyExample("toastUpdate")} for an example.
 #'
 #' @param session the Shiny \code{session} object
-#' @param toastId the id of the toast to be updated
+#' @param toastId the id of the toast to be updated (\code{id} argument)
 #' @param text the text displayed in the toast; this can be a character string,
 #'   an html element created with the \code{\link[htmltools:HTML]{HTML}}
 #'   function, or a \code{shiny.tag} object such as
@@ -339,7 +340,7 @@ toastUpdate <- function(
   }else if(!isString(text)){
     stop(
       "The `text` argument must be either an ordinary character string or ",
-      "a html string created with the `HTML` function.",
+      "a html string created with the `HTML` function or a shiny tag.",
       call. = TRUE
     )
   }

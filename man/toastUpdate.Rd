@@ -31,7 +31,7 @@ toastUpdate(
 \arguments{
 \item{session}{the Shiny \code{session} object}
 
-\item{toastId}{the id of the toast to be updated}
+\item{toastId}{the id of the toast to be updated (\code{id} argument)}
 
 \item{text}{the text displayed in the toast; this can be a character string,
 an html element created with the \code{\link[htmltools:HTML]{HTML}}
@@ -88,5 +88,6 @@ updated}
 No return value, called for side effect.
 }
 \description{
-Update a toast in a Shiny application.
+Update a toast in a Shiny application. Run
+  \code{shinyToastifyExample("toastUpdate")} for an example.
 }
