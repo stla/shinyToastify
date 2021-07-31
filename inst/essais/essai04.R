@@ -49,6 +49,7 @@ server <- function(input, output, session){
     showToast(
       session,
       input,
+      id = "mytoast",
       text = html,
       type = toastType,
       transition = input[["transition"]],
@@ -57,6 +58,10 @@ server <- function(input, output, session){
       JScallback = "Shiny.setInputValue('test', 'HELLO')"
     )
 
+  })
+
+  observeEvent(input[["mytoast_closed"]], {
+    print("id works")
   })
 
 }

@@ -33,6 +33,8 @@ useShinyToastify <- function(){
 #'
 #' @param session the Shiny \code{session} object
 #' @param input the Shiny \code{input} object
+#' @param id an id for the toast or \code{NULL} for automatic id; see details
+#'   for the use of this id
 #' @param text the text displayed in the toast; this can be a character string,
 #'   an html element created with the \code{\link[htmltools:HTML]{HTML}}
 #'   function, or a \code{shiny.tag} object such as
@@ -47,7 +49,7 @@ useShinyToastify <- function(){
 #' @param autoClose either a number, the time in ms to close the toast, or
 #'   \code{FALSE} to close the toast manually
 #' @param hideProgressBar Boolean, whether to hide the progress bar
-#' @param newestOnTop I don't know what is this option (help wanted)
+#' @param newestOnTop Boolean, whether to display newest toast on top
 #' @param closeOnClick Boolean, whether to dismiss the toast on click
 #' @param rtl Boolean, right to left
 #' @param pauseOnFocusLoss Boolean, whether to pause the toast on focus loss
@@ -63,7 +65,7 @@ useShinyToastify <- function(){
 #' @param style inline style applied to the container, e.g.
 #'   \code{list(boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 30px 4px")}
 #' @param Rcallback a R function without arguments to be executed whenever the
-#'   toast is closed
+#'   toast is closed; alternatively, use the \code{id} argument (see details)
 #' @param JScallback some JavaScript code given as a string to be executed
 #'   whenever the toast is closed, e.g. \code{'alert("The toast is closed")'}
 #'
@@ -73,6 +75,12 @@ useShinyToastify <- function(){
 #' @importFrom utils URLencode
 #' @importFrom shiny observeEvent
 #' @importFrom htmltools HTML
+#'
+#' @details \strong{Usage of the \code{id} argument.} If you provide a string
+#'   to the \code{id} argument, say \code{"mytoast"}, the application will
+#'   send the event \code{input[["mytoast_closed"]]} to the server whenever
+#'   the toast closes; therefore you can listen to this event with an observer
+#'   to perform an action whenever the toast closes.
 #'
 #' @examples library(shiny)
 #' library(shinyToastify)
@@ -122,6 +130,7 @@ useShinyToastify <- function(){
 showToast <- function(
   session,
   input,
+  id = NULL,
   text,
   type = "default",
   position = "top-right",
@@ -144,6 +153,7 @@ showToast <- function(
   Rcallback = function(){NULL},
   JScallback = NULL
 ){
+  stopifnot(is.null(id) || isString(id))
   stopifnot(isString(type))
   stopifnot(isString(position))
   stopifnot(isString(transition))
@@ -189,6 +199,7 @@ showToast <- function(
       c("info", "success", "warning", "error", "default", "dark")
     ),
     "config" = dropNulls(list(
+      "toastId" = id,
       "position" = match.arg(
         position,
         c(

@@ -7,6 +7,7 @@
 showToast(
   session,
   input,
+  id = NULL,
   text,
   type = "default",
   position = "top-right",
@@ -35,6 +36,9 @@ showToast(
 
 \item{input}{the Shiny \code{input} object}
 
+\item{id}{an id for the toast or \code{NULL} for automatic id; see details
+for the use if this id}
+
 \item{text}{the text displayed in the toast; this can be a character string,
 an html element created with the \code{\link[htmltools:HTML]{HTML}}
 function, or a \code{shiny.tag} object such as
@@ -55,7 +59,7 @@ function, or a \code{shiny.tag} object such as
 
 \item{hideProgressBar}{Boolean, whether to hide the progress bar}
 
-\item{newestOnTop}{I don't know what is this option (help wanted)}
+\item{newestOnTop}{Boolean, whether to display newest toast on top}
 
 \item{closeOnClick}{Boolean, whether to dismiss the toast on click}
 
@@ -84,7 +88,7 @@ remove it by dragging}
 \code{list(boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 30px 4px")}}
 
 \item{Rcallback}{a R function without arguments to be executed whenever the
-toast is closed}
+toast is closed; alternatively, use the \code{id} argument (see details)}
 
 \item{JScallback}{some JavaScript code given as a string to be executed
 whenever the toast is closed, e.g. \code{'alert("The toast is closed")'}}
@@ -94,6 +98,13 @@ No return value, called for side effect.
 }
 \description{
 Show a toast in a Shiny application.
+}
+\details{
+\strong{Usage of the \code{id} argument.} If you provide a string
+  to the \code{id} argument, say \code{"mytoast"}, the application will
+  send the event \code{input[["mytoast_closed"]]} to the server whenever
+  the toast closes; therefore you can listen to this event with an observer
+  to perform an action whenever the toast closes.
 }
 \examples{
 library(shiny)

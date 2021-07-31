@@ -9625,9 +9625,20 @@ Shiny.addCustomMessageHandler("shinyToastify", function (message) {
     jscallback = eval("() => {".concat(decodeURI(message.JScallback), "}"));
   }
 
+  var f = function f() {};
+
+  if (message.config.hasOwnProperty("toastId")) {
+    f = function f() {
+      Shiny.setInputValue(message.config.toastId + "_closed", true, {
+        priority: "event"
+      });
+    };
+  }
+
   message.config = $.extend(message.config, {
     onClose: function onClose() {
       jscallback();
+      f();
       Shiny.setInputValue("shinyToastifyOnClose", true);
       setTimeout(function () {
         Shiny.setInputValue("shinyToastifyOnClose", null);
