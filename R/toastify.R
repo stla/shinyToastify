@@ -288,7 +288,7 @@ toastUpdate <- function(
   transition = "slide",
   autoClose = 5000,
   hideProgressBar = FALSE,
-  newestOnTop = FALSE,
+  # newestOnTop = FALSE,
   closeOnClick = TRUE,
   rtl = FALSE,
   pauseOnFocusLoss = TRUE,
@@ -301,7 +301,7 @@ toastUpdate <- function(
   bodyClassName = NULL,
   progressClassName = NULL,
   style = NULL,
-  Rcallback = function(){NULL},
+  # Rcallback = function(){NULL},
   JScallback = NULL
 ){
   stopifnot(isString(toastId))
@@ -345,8 +345,8 @@ toastUpdate <- function(
   }
   message <- list(
     "toastId" = toastId,
-    "render" = text,
     "config" = dropNulls(list(
+      "render" = text,
       "type" = match.arg(
         type,
         c("info", "success", "warning", "error", "default", "dark")

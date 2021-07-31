@@ -70,8 +70,8 @@ Shiny.addCustomMessageHandler("shinyToastify", function(message){
 
 
 Shiny.addCustomMessageHandler("shinyToastifyUpdate", function(message){
-  if(isHTML(message.render)){
-    message.render = <HtmlComponent html={message.render.__html} />;
+  if(isHTML(message.config.render)){
+    message.config.render = <HtmlComponent html={message.config.render.__html} />;
   }
   switch(message.config.transition) {
     case "slide":

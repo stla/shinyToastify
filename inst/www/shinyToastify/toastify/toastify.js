@@ -9648,9 +9648,9 @@ Shiny.addCustomMessageHandler("shinyToastify", function (message) {
   toaster(message.text, message.config);
 });
 Shiny.addCustomMessageHandler("shinyToastifyUpdate", function (message) {
-  if (isHTML(message.render)) {
-    message.render = /*#__PURE__*/React.createElement(HtmlComponent, {
-      html: message.render.__html
+  if (isHTML(message.config.render)) {
+    message.config.render = /*#__PURE__*/React.createElement(HtmlComponent, {
+      html: message.config.render.__html
     });
   }
 

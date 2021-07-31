@@ -13,7 +13,6 @@ toastUpdate(
   transition = "slide",
   autoClose = 5000,
   hideProgressBar = FALSE,
-  newestOnTop = FALSE,
   closeOnClick = TRUE,
   rtl = FALSE,
   pauseOnFocusLoss = TRUE,
@@ -26,7 +25,6 @@ toastUpdate(
   bodyClassName = NULL,
   progressClassName = NULL,
   style = NULL,
-  Rcallback = function() {     NULL },
   JScallback = NULL
 )
 }
